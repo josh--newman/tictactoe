@@ -14,10 +14,12 @@ PlayerQueue.prototype.addPlayer = function(player) {
 };
 
 PlayerQueue.prototype.startPolling = function(time, callback) {
+  var queue = this.queue;
   setInterval(function () {
     console.log('polling the queue');
+    console.log(this);
     // Stop here if not two players
-    if (this.queue.length < 2) { return; }
+    if (queue.length < 2) { return; }
 
     // Grab the first two players and throw them into a game
     callback(player1, player2);

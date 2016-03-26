@@ -20,7 +20,7 @@ describe('Socket communication', () => {
     done();
   });
 
-  it('registers a new player', (done) => {
+  it.skip('registers a new player', (done) => {
     const client = io.connect(socketURL, options);
 
     client.once('connect', (data) => {
