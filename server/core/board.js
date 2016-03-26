@@ -2,6 +2,7 @@
 function Board(size) {
   if(size < 3) { throw Error('Board cannot be smaller than 3x3'); }
   this.symbols = { X: 'X', O: 'O'};
+  this.winningSymbol = undefined;
   this.size = size;
   this.squares = this.buildBoard();
 }
@@ -14,7 +15,6 @@ Board.prototype.buildBoard = function() {
   for (var i = 0; i < this.size; i++) {
     row.push(0);
   }
-
   for (var j = 0; j < this.size; j++) {
     squares.push(row);
   }
@@ -33,6 +33,7 @@ Board.prototype.move = function(x, y, symbol) {
   }
 
   // Check for winner
+  this.winningSymbol = this.checkWin();
 };
 
 // Returns the symbol of the winner

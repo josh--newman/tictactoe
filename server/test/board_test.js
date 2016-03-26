@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Board from '../core/board.js';
+import Board from '../core/board';
 
 describe('Board', () => {
 
