@@ -16,8 +16,6 @@ PlayerQueue.prototype.addPlayer = function(player) {
 PlayerQueue.prototype.startPolling = function(time, callback) {
   var queue = this.queue;
   setInterval(function () {
-    console.log('polling the queue');
-    console.log(this);
     // Stop here if not two players
     if (queue.length < 2) { return; }
 
