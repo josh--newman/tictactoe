@@ -4,7 +4,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const path = require('path');
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
