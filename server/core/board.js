@@ -34,7 +34,7 @@ Board.prototype.move = function(x, y, symbol) {
   else { throw Error('Space already taken'); }
 
   // Check for winner
-  // this.winningSymbol = this.checkWin();
+  this.winningSymbol = this.checkWin();
 };
 
 // Returns the symbol of the winner
