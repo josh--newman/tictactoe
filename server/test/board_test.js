@@ -29,9 +29,14 @@ describe('Board', () => {
 
   it('accepts moves', () => {
     let board = new Board(3);
-    board.move(0,0,'X');
+    const newSquares = [
+      ['X',0,0],
+      [0,0,0],
+      [0,0,0]
+    ];
 
-    expect(board.squares[0][0]).to.equal('X');
+    board.move(0,0,'X');
+    expect(board.squares).to.eql(newSquares);
   });
 
   it('does not accept an invalid move', () => {

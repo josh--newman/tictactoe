@@ -10,12 +10,12 @@ function Board(size) {
 // Builds the board in 2D array
 Board.prototype.buildBoard = function() {
   var squares = [];
-  var row = [];
 
   for (var i = 0; i < this.size; i++) {
-    row.push(0);
-  }
-  for (var j = 0; j < this.size; j++) {
+    var row = [];
+    for (var j = 0; j < this.size; j++) {
+      row.push(0);
+    }
     squares.push(row);
   }
 
@@ -31,9 +31,10 @@ Board.prototype.move = function(x, y, symbol) {
   if (this.squares[x][y] === 0) {
     this.squares[x][y] = symbol;
   }
+  else { throw Error('Space already taken'); }
 
   // Check for winner
-  this.winningSymbol = this.checkWin();
+  // this.winningSymbol = this.checkWin();
 };
 
 // Returns the symbol of the winner
