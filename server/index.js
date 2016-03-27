@@ -90,9 +90,9 @@ io.on('connection', function(socket) {
     socket.to(game.player1).to(game.player2).emit('move made', data);
 
     // check if game is over
-    if (game.gameOver) {
+    if (game.gameOver && game.winner) {
       // emit to all players
-      socket.to(game.player1).to(game.player2).emit('game over');
+      socket.to(game.player1).to(game.player2).emit('game over', game.winner);
       // kill game
       delete currentGames[data.gameId];
     }
