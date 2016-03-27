@@ -19,7 +19,15 @@ PlayerQueue.prototype.startPolling = function(time, callback) {
     // Stop here if not two players
     if (queue.length < 2) { return; }
 
-    // Grab the first two players and throw them into a game
+    // Grab two random players and throw them into the callback
+    var index = Math.floor(Math.random() * queue.length);
+    const player1 = queue[index];
+    queue.splice(index, 1);
+
+    index = Math.floor(Math.random() * queue.length);
+    const player2 = queue[index];
+    queue.splice(index, 1);
+
     callback(player1, player2);
 
   }, time);

@@ -32,10 +32,11 @@ playerQueue.startPolling(2000, function(player1, player2) {
     player1: newGame.player1,
     player2: newGame.player2,
     whoseTurn: newGame.whoseTurn,
-    boardLayout: newGame.board
+    boardLayout: newGame.board.squares
   };
 
   io.to(player1.id).to(player2.id).emit('game created', data);
+  console.log(currentGames);
 });
 
 // Socket events ---------------------------------------------------------------
