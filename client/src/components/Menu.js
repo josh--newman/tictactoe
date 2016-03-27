@@ -22,7 +22,7 @@ export default class Menu extends Component {
   render() {
     return (
       <div className='menu'>
-        {renderStartEnd()}
+        {this.renderStartEnd()}
 
         <div className="player-info">
           <h2>Players</h2>
