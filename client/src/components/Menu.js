@@ -1,13 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Menu extends Component {
-
+  renderStartEnd() {
+    if (this.props.currentlyPlaying) {
+      return (
+        <div className="end-game">
+          <button>End game</button>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="start-game">
+          <input type='text' placeholder='Enter name'/>
+          <button>Start</button>
+        </div>
+      );
+    }
+  }
 
   render() {
     return (
       <div className='menu'>
-        <input type='text' placeholder='Enter name'/>
-        <button>Start</button>
+        {renderStartEnd()}
 
         <div className="player-info">
           <h2>Players</h2>
