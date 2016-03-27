@@ -1,1 +1,27 @@
+.app {
+  margin: 0 auto;
+  h1 {
+    text-align: center;
+  }
+}
 
+.play-area {
+  display: flex;
+}
+
+.board {
+  display: flex;
+  background-color: lightgray;
+  margin-left: 2em;
+  .board-row {
+    .tile {
+      flex: 1;
+      padding: 5em;
+    }
+  }
+
+}
+
+.board-row {
+  flex: 1
+}

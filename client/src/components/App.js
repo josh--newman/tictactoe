@@ -17,8 +17,10 @@ export default class App extends Component {
     return (
       <div className="app">
         <h1>Tic Tac Toe</h1>
-        <Menu />
-        <Board />
+        <div className="play-area">
+          <Menu />
+          <Board />
+        </div>
       </div>
     );
   }

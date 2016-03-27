@@ -10,7 +10,7 @@ export default class Board extends Component {
       for (let j = 0; j < size; j++) {
         row.push(<Tile pos={{x: i, y: j}} value={0} />);
       }
-      tiles.push(row);
+      tiles.push(<div className='board-row'>{row}</div>);
     }
     return tiles;
   }
