@@ -5,6 +5,7 @@ const socket = io(serverURL);
 
 import Menu from './Menu';
 import Board from './Board';
+import Status from './Status';
 
 const defaultState = {
   waiting: false,
@@ -13,7 +14,8 @@ const defaultState = {
   otherPlayer: {name: '', symbol: ''},
   whoseTurn:   null,
   boardLayout: [[0,0,0],[0,0,0],[0,0,0]],
-  gameId:      null
+  gameId:      null,
+  winner:      ''
 };
 
 export default class App extends Component {
@@ -28,6 +30,7 @@ export default class App extends Component {
     socket.on('join success', this.joinSuccess.bind(this));
     socket.on('player disconnect', this.playerDisconnect.bind(this));
     socket.on('move made', this.moveMade.bind(this));
+    socket.on('game over', this.gameOver.bind(this));
   }
 
   onJoinQueue(playerName) {
@@ -78,6 +81,13 @@ export default class App extends Component {
     });
   }
 
+  gameOver(winner) {
+    this.setState({ winner: winner });
+    setTimeout(() => {
+      this.setState(defaultState);
+    }, 3000);
+  }
+
   onEndGame() {
     // Disconnect socket which will notify other player
     // then reconnect again to play another game
@@ -99,6 +109,7 @@ export default class App extends Component {
           <Menu onJoinQueue={this.onJoinQueue}
                 onEndGame={this.onEndGame.bind(this)}
                 {...this.state} />
+          <Status winner={this.state.winner.name} />
           <Board key={this.state.gameId}
                  makeMove={this.makeMove.bind(this)}
                  whoseTurn={this.state.whoseTurn}
