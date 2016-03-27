@@ -27,6 +27,7 @@ export default class App extends Component {
     socket.on('game created', this.gameCreated.bind(this));
     socket.on('join success', this.joinSuccess.bind(this));
     socket.on('player disconnect', this.playerDisconnect.bind(this));
+    socket.on('move made', this.moveMade.bind(this));
   }
 
   onJoinQueue(playerName) {
@@ -53,13 +54,28 @@ export default class App extends Component {
       otherPlayer: other,
       whoseTurn:   data.whoseTurn,
       boardLayout: data.boardLayout,
-      gameId:      data.id
+      gameId:      data.gameId
     });
     console.log(this.state);
   }
 
-  makeMove() {
-    // socket.emit('make move', )
+  makeMove(move) {
+    // move should be:
+    // { gameId: 123456, coords: {x:0, y:0}, playerId: '/#kaljsdfgi' }
+    const moveData = {
+      gameId: this.state.gameId,
+      coords: move,
+      player: this.state.me
+    };
+    console.log(moveData);
+    socket.emit('make move', moveData);
+  }
+
+  moveMade(moveResponse) {
+    this.setState({
+      whoseTurn: moveResponse.whoseTurn,
+      boardLayout: moveResponse.newLayout
+    });
   }
 
   onEndGame() {
@@ -83,7 +99,9 @@ export default class App extends Component {
           <Menu onJoinQueue={this.onJoinQueue}
                 onEndGame={this.onEndGame.bind(this)}
                 {...this.state} />
-              <Board key={this.state.gameId}/>
+              <Board key={this.state.gameId}
+                     makeMove={this.makeMove.bind(this)}
+                     whoseTurn={this.state.whoseTurn}/>
         </div>
       </div>
     );

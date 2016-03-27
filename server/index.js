@@ -87,12 +87,17 @@ io.on('connection', function(socket) {
 
   socket.on('make move', function(data) {
     const game = currentGames[data.gameId];
-    game.move(data.coords.x, data.coords.x, data.player.id);
+    game.move(data.player, data.coords);
 
-    const moves = {
-      newLayout: game.board.squares,
+    console.log('Game: ' + game.id);
+    console.log(data.player.name + ' made a move');
+    console.log('Board: \n' + game.board.squares);
+
+    const moveResponse = {
+      whoseTurn: game.whoseTurn,
+      newLayout: game.board.squares
     };
-    io.to(game.player1).to(game.player2).emit('move made', data);
+    io.to(game.player1).to(game.player2).emit('move made', moveResponse);
 
     // check if game is over
     if (game.gameOver && game.winner) {
