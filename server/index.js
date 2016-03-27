@@ -53,18 +53,20 @@ io.on('connection', function(socket) {
       console.log('Removed player', socket.id);
     }
     // if in a game, emit to other player in game
-    currentGames.forEach(function(game) {
-      if (game.player1.id === socket.id) {
+    for (var game in currentGames) {
+      var thisGame = currentGames[game];
+      if (thisGame.player1.id === socket.id) {
         // emit to player 2
-        socket.to(game.player2.id).emit('player disconnect');
+        socket.to(thisGame.player2.id).emit('player disconnect');
         // kill game
-        delete currentGames[game.id];
+        delete currentGames[game];
       }
-      else if (game.player2.id === socket.id) {
-        socket.to(game.player1.id).emit('player disconnect');
-        delete currentGames[game.id];
+      else if (thisGame.player2.id === socket.id) {
+        socket.to(thisGame.player1.id).emit('player disconnect');
+        delete currentGames[game];
       }
-    });
+      console.log(currentGames);
+    }
   });
 
   socket.on('join queue', function(data) {
