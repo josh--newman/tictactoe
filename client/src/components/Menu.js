@@ -14,6 +14,9 @@ export default class Menu extends Component {
         </div>
       );
     }
+    else if (this.props.waiting) {
+      return (<div className="waiting">Waiting for a player to join the game</div>);
+    }
     else {
       return (
         <form className="start-game" onSubmit={this.handleSubmit.bind(this)}>
@@ -30,7 +33,6 @@ export default class Menu extends Component {
 
   onKey(e) {
     this.setState({ playerName: e.target.value });
-    console.log(this.state.playerName);
   }
 
   handleSubmit(e) {
