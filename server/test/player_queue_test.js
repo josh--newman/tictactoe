@@ -23,7 +23,7 @@ describe('Player queue', () => {
   });
 
   it('removes a player', () => {
-    queue.removePlayer(player1);
+    queue.removePlayer(player1.id);
     expect(queue.queue).to.eql([player2]);
   });
 });
