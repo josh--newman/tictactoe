@@ -29,10 +29,11 @@ playerQueue.startPolling(2000, function(player1, player2) {
   // Let players know that they're in a game
   // Send:
   const data = {
-    player1: newGame.player1,
-    player2: newGame.player2,
-    whoseTurn: newGame.whoseTurn,
-    boardLayout: newGame.board.squares
+    player1:     newGame.player1,
+    player2:     newGame.player2,
+    whoseTurn:   newGame.whoseTurn,
+    boardLayout: newGame.board.squares,
+    gameId:      newGame.id
   };
 
   io.to(player1.id).to(player2.id).emit('game created', data);
