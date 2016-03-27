@@ -58,12 +58,12 @@ io.on('connection', function(socket) {
         var thisGame = currentGames[game];
         if (thisGame.player1.id === socket.id) {
           // emit to player 2
-          socket.to(thisGame.player2.id).emit('player disconnect');
+          io.to(thisGame.player2.id).emit('player disconnect');
           // kill game
           delete currentGames[game];
         }
         else if (thisGame.player2.id === socket.id) {
-          socket.to(thisGame.player1.id).emit('player disconnect');
+          io.to(thisGame.player1.id).emit('player disconnect');
           delete currentGames[game];
         }
         console.log(currentGames);
@@ -79,9 +79,10 @@ io.on('connection', function(socket) {
       };
       playerQueue.addPlayer(player);
       console.log('Player joined queue', socket.id);
+      io.to(socket.id).emit('join success', {success: 'success'});
     }
-
     console.log('Player queue:', playerQueue.queue);
+
   });
 
   socket.on('make move', function(data) {
@@ -91,12 +92,12 @@ io.on('connection', function(socket) {
     const moves = {
       newLayout: game.board.squares,
     };
-    socket.to(game.player1).to(game.player2).emit('move made', data);
+    io.to(game.player1).to(game.player2).emit('move made', data);
 
     // check if game is over
     if (game.gameOver && game.winner) {
       // emit to all players
-      socket.to(game.player1).to(game.player2).emit('game over', game.winner);
+      io.to(game.player1).to(game.player2).emit('game over', game.winner);
       // kill game
       delete currentGames[data.gameId];
     }
