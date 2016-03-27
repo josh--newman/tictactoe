@@ -21,10 +21,12 @@ var Game = require('./core/game');
 const BOARD_SIZE = 3; // change this to change board size
 
 var playerQueue = new PlayerQueue();
-var currentGames = [];
+var currentGames = {};
 playerQueue.startPolling(2000, function(player1, player2) {
   var newGame = new Game(player1, player2, BOARD_SIZE);
-  currentGames.push(newGame);
+  if (!currentGames[newGame.id]) {
+    currentGames[newGame.id] = newGame;
+  }
 
   // Let players know that they're in a game
   // Send:
