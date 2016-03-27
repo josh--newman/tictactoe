@@ -20,6 +20,8 @@ This is an attempt to implement Tic Tac Toe in a multiplayer fashion using a cen
     [0,0,0],
     [0,0,0]
   ],
+  player1: { name: 'Josh', symbol: 'X' },
+  player2: { name: 'Bill', symbol: 'O' },
   myTurn: false,
   winner: null
 }
