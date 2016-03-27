@@ -7,6 +7,8 @@
 
 .play-area {
   display: flex;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .board {
@@ -20,8 +22,4 @@
     }
   }
 
-}
-
-.board-row {
-  flex: 1
 }
