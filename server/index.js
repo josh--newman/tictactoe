@@ -79,4 +79,22 @@ io.on('connection', function(socket) {
 
     console.log('Player queue:', playerQueue.queue);
   });
+
+  socket.on('make move', function(data) {
+    const game = currentGames[data.gameId];
+    game.move(data.coords.x, data.coords.x, data.player.id);
+
+    const moves = {
+      newLayout: game.board.squares,
+    };
+    socket.to(game.player1).to(game.player2).emit('move made', data);
+
+    // check if game is over
+    if (game.gameOver) {
+      // emit to all players
+      socket.to(game.player1).to(game.player2).emit('game over');
+      // kill game
+      delete currentGames[data.gameId];
+    }
+  });
 });
