@@ -13,6 +13,16 @@ PlayerQueue.prototype.addPlayer = function(player) {
   this.queue.push(player);
 };
 
+PlayerQueue.prototype.removePlayer = function(playerId) {
+  for (var i = 0; i < this.queue.length; i++) {
+    if (this.queue[i].id === playerId) {
+      this.queue.splice(i, 1);
+      return true;
+    }
+    else { return false; } // no player removed
+  }
+};
+
 PlayerQueue.prototype.startPolling = function(time, callback) {
   var queue = this.queue;
   setInterval(function () {
