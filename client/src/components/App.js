@@ -3,11 +3,11 @@ import io from 'socket.io-client';
 
 export default class App extends Component {
   componentDidMount() {
-    const clientSocket = io();
-    clientSocket.emit('join queue', { name: "Josh" });
-    clientSocket.on('game created', (data) => {
-      console.log(data);
-    });
+    // const clientSocket = io();
+    // clientSocket.emit('join queue', { name: "Josh" });
+    // clientSocket.on('game created', (data) => {
+    //   console.log(data);
+    // });
   }
 
   render() {

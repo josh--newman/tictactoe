@@ -5,7 +5,7 @@
   "main": "./server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
-    "test": "mocha --compilers js:babel-core/register --recursive ./server/test",
+    "test": "mocha --compilers js:babel-core/register --recursive ./server/test ./client/test",
     "test:watch": "npm run test -- --watch"
   },
   "author": "Josh Newman",
