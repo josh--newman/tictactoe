@@ -12,7 +12,7 @@ const defaultState = {
   me:          {name: '', symbol: ''},
   otherPlayer: {name: '', symbol: ''},
   whoseTurn:   null,
-  boardLayout: [],
+  boardLayout: [[0,0,0],[0,0,0],[0,0,0]],
   gameId:      null
 };
 
@@ -99,9 +99,10 @@ export default class App extends Component {
           <Menu onJoinQueue={this.onJoinQueue}
                 onEndGame={this.onEndGame.bind(this)}
                 {...this.state} />
-              <Board key={this.state.gameId}
-                     makeMove={this.makeMove.bind(this)}
-                     whoseTurn={this.state.whoseTurn}/>
+          <Board key={this.state.gameId}
+                 makeMove={this.makeMove.bind(this)}
+                 whoseTurn={this.state.whoseTurn}
+                 layout={this.state.boardLayout} />
         </div>
       </div>
     );

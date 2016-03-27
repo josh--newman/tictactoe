@@ -97,7 +97,7 @@ io.on('connection', function(socket) {
       whoseTurn: game.whoseTurn,
       newLayout: game.board.squares
     };
-    io.to(game.player1).to(game.player2).emit('move made', moveResponse);
+    io.to(game.player1.id).to(game.player2.id).emit('move made', moveResponse);
 
     // check if game is over
     if (game.gameOver && game.winner) {
