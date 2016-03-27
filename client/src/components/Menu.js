@@ -10,7 +10,7 @@ export default class Menu extends Component {
     if (this.props.currentlyPlaying) {
       return (
         <div className="end-game">
-          <button>End game</button>
+          <button onClick={this.handleEndGame.bind(this)}>End game</button>
         </div>
       );
     }
@@ -40,6 +40,10 @@ export default class Menu extends Component {
     const playerName = this.state.playerName;
     this.props.onJoinQueue(playerName);
     this.setState({ playerName: '' });
+  }
+
+  handleEndGame() {
+    this.props.onEndGame();
   }
 
   render() {
