@@ -48,7 +48,23 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('Client disconnected with ID:', socket.id);
-    // kick player out of queue / game
+    // if in queue, just remove them
+    if (playerQueue.removePlayer(socket.id)) {
+      console.log('Removed player', socket.id);
+    }
+    // if in a game, emit to other player in game
+    currentGames.forEach(function(game) {
+      if (game.player1.id === socket.id) {
+        // emit to player 2
+        socket.to(game.player2.id).emit('player disconnect');
+        // kill game
+        delete currentGames[game.id];
+      }
+      else if (game.player2.id === socket.id) {
+        socket.to(game.player1.id).emit('player disconnect');
+        delete currentGames[game.id];
+      }
+    });
   });
 
   socket.on('join queue', function(data) {
