@@ -54,12 +54,12 @@ export default class Menu extends Component {
         <div className="player-info">
           <h2>Players</h2>
           <div className="player-card">
-            <span>{/*this.props.player1.name*/}Josh</span>
-            <span>{/*this.props.player1.symbol*/}X</span>
+            <span>{this.props.me.name}</span>
+            <span>{this.props.me.symbol}</span>
           </div>
           <div className="player-card">
-            <span>{/*this.props.player2.name*/}Bill</span>
-            <span>{/*this.props.player2.symbol*/}O</span>
+            <span>{this.props.otherPlayer.name}</span>
+            <span>{this.props.otherPlayer.symbol}</span>
           </div>
         </div>
       </div>

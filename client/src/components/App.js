@@ -6,25 +6,38 @@ const socket = io(serverURL);
 import Menu from './Menu';
 import Board from './Board';
 
+const defaultState = {
+  waiting: false,
+  currentlyPlaying: false,
+  me:          {name: '', symbol: ''},
+  otherPlayer: {name: '', symbol: ''},
+  whoseTurn:   null,
+  boardLayout: [],
+  gameId:      null
+};
+
 export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      waiting: false,
-      currentlyPlaying: false,
-      player1:     {},
-      player2:     {},
-      whoseTurn:   null,
-      boardLayout: [],
-      gameId:      null
-    };
+    this.state = defaultState;
   }
 
   componentDidMount() {
     socket.on('game created', this.gameCreated.bind(this));
     socket.on('join success', this.joinSuccess.bind(this));
     socket.on('player disconnect', this.playerDisconnect.bind(this));
+  }
+
+  onJoinQueue(playerName) {
+    socket.emit('join queue', { name: playerName });
+  }
+
+  joinSuccess(success) {
+    if (success) {
+      this.setState({waiting: true});
+    }
+    else { return alert('There was an error joining the queue'); }
   }
 
   gameCreated(data) {
@@ -45,15 +58,8 @@ export default class App extends Component {
     console.log(this.state);
   }
 
-  joinSuccess(success) {
-    if (success) {
-      this.setState({waiting: true});
-    }
-    else { return alert('There was an error joining the queue'); }
-  }
-
-  onJoinQueue(playerName) {
-    socket.emit('join queue', { name: playerName });
+  makeMove() {
+    // socket.emit('make move', )
   }
 
   onEndGame() {
@@ -66,7 +72,7 @@ export default class App extends Component {
 
   playerDisconnect() {
     console.log('Other player disconnected');
-    this.setState({ currentlyPlaying: false });
+    this.setState(defaultState);
   }
 
   render() {
