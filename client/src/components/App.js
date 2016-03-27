@@ -22,23 +22,27 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    socket.on('game created', (data) => {
-      console.log(data);
-      
-      this.setState({
-        waiting: false,
-        currentlyPlaying: true,
-        player1:     data.player1,
-        player2:     data.player2,
-        whoseTurn:   data.whoseTurn,
-        boardLayout: data.boardLayout,
-        gameId:      data.id
-      });
-      console.log(this.state);
-    });
-
+    socket.on('game created', this.gameCreated.bind(this));
     socket.on('join success', this.joinSuccess.bind(this));
     socket.on('player disconnect', this.playerDisconnect.bind(this));
+  }
+
+  gameCreated(data) {
+    console.log(data);
+    const myId = `/#${socket.io.engine.id}`;
+    const me = data.player1.id === myId ? data.player1 : data.player2;
+    const other = myId === data.player1.id ? data.player2 : data.player1;
+
+    this.setState({
+      waiting: false,
+      currentlyPlaying: true,
+      me:          me,
+      otherPlayer: other,
+      whoseTurn:   data.whoseTurn,
+      boardLayout: data.boardLayout,
+      gameId:      data.id
+    });
+    console.log(this.state);
   }
 
   joinSuccess(success) {
@@ -54,8 +58,8 @@ export default class App extends Component {
 
   onEndGame() {
     // Disconnect socket which will notify other player
-    socket.disconnect();
     // then reconnect again to play another game
+    socket.disconnect();
     socket.connect();
     this.setState({ currentlyPlaying: false });
   }
@@ -72,8 +76,7 @@ export default class App extends Component {
         <div className="play-area">
           <Menu onJoinQueue={this.onJoinQueue}
                 onEndGame={this.onEndGame.bind(this)}
-                currentlyPlaying={this.state.currentlyPlaying}
-                waiting={this.state.waiting} />
+                {...this.state} />
               <Board key={this.state.gameId}/>
         </div>
       </div>
