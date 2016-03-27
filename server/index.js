@@ -54,18 +54,20 @@ io.on('connection', function(socket) {
     }
     // if in a game, emit to other player in game
     for (var game in currentGames) {
-      var thisGame = currentGames[game];
-      if (thisGame.player1.id === socket.id) {
-        // emit to player 2
-        socket.to(thisGame.player2.id).emit('player disconnect');
-        // kill game
-        delete currentGames[game];
+      if (currentGames.hasOwnProperty(game)) {
+        var thisGame = currentGames[game];
+        if (thisGame.player1.id === socket.id) {
+          // emit to player 2
+          socket.to(thisGame.player2.id).emit('player disconnect');
+          // kill game
+          delete currentGames[game];
+        }
+        else if (thisGame.player2.id === socket.id) {
+          socket.to(thisGame.player1.id).emit('player disconnect');
+          delete currentGames[game];
+        }
+        console.log(currentGames);
       }
-      else if (thisGame.player2.id === socket.id) {
-        socket.to(thisGame.player1.id).emit('player disconnect');
-        delete currentGames[game];
-      }
-      console.log(currentGames);
     }
   });
 
