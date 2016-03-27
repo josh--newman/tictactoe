@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { playerName: '' };
+  }
+
   renderStartEnd() {
     if (this.props.currentlyPlaying) {
       return (
@@ -11,12 +16,28 @@ export default class Menu extends Component {
     }
     else {
       return (
-        <div className="start-game">
-          <input type='text' placeholder='Enter name'/>
+        <form className="start-game" onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            type='text'
+            placeholder='Enter name'
+            onChange={this.onKey.bind(this)}
+            value={this.state.playerName} />
           <button>Start</button>
-        </div>
+        </form>
       );
     }
+  }
+
+  onKey(e) {
+    this.setState({ playerName: e.target.value });
+    console.log(this.state.playerName);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const playerName = this.state.playerName;
+    this.props.onJoinQueue(playerName);
+    this.setState({ playerName: '' });
   }
 
   render() {
