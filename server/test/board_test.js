@@ -57,6 +57,16 @@ describe('Board', () => {
       board = new Board(3);
     });
 
+    it('finds a draw', () => {
+      board.squares = [
+        ['X','O','X'],
+        ['X','O','O'],
+        ['O','X','X'],
+      ];
+
+      expect(board.checkWin()).to.equal('draw');
+    });
+
     describe('finds a win', () => {
       it('horizontally', () => {
         let board = new Board(3);

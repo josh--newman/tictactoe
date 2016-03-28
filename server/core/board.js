@@ -73,6 +73,18 @@ Board.prototype.checkWin = function() {
     if (i === this.size - 1) { return currSym; }
   }
 
+  // Check draw
+  var foundEmpty = false;
+  for (i = 0; i < this.size; i++) {
+    for (j = 0; j < this.size; j++) {
+      if (this.squares[i][j] === 0) {
+        foundEmpty = true;
+        continue;
+      }
+    }
+  }
+  if(!foundEmpty) { return 'draw'; }
+
 
 };
 
