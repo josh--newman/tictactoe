@@ -83,11 +83,17 @@ export default class App extends Component {
   }
 
   gameOver(winner) {
-    this.setState({
-      winner: winner,
-      message: `${winner.name} wins!`,
-      currentlyPlaying: false
-    });
+    if (winner) {
+      this.setState({
+        winner: winner,
+        message: `${winner.name} wins!`
+      });
+    }
+    else { // draw
+      this.setState({ message: 'Draw!' });
+    }
+
+    this.setState({ currentlyPlaying: false });
   }
 
   onEndGame() {

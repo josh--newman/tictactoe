@@ -39,6 +39,9 @@ Game.prototype.move = function(player, coords) {
     this.gameOver = true;
     this.winner = this.player2;
   }
+  else if (this.board.winningSymbol === 'draw') {
+    this.gameOver = true;
+  }
 };
 
 

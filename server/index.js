@@ -109,5 +109,13 @@ io.on('connection', function(socket) {
       // kill game
       delete currentGames[data.gameId];
     }
+    else if (game.gameOver && !game.winner) { //draw
+      console.log('Game ' + game.id + ' FINISHED');
+      console.log('DRAW');
+      // emit to all players
+      io.to(game.player1.id).to(game.player2.id).emit('game over', game.winner);
+      // kill game
+      delete currentGames[data.gameId];
+    }
   });
 });
