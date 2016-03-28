@@ -109,11 +109,11 @@ export default class App extends Component {
           <Menu onJoinQueue={this.onJoinQueue}
                 onEndGame={this.onEndGame.bind(this)}
                 {...this.state} />
-          <Status winner={this.state.winner.name} />
           <Board key={this.state.gameId}
                  makeMove={this.makeMove.bind(this)}
                  {...this.state} />
         </div>
+        <Status winner={this.state.winner.name} />
       </div>
     );
   }

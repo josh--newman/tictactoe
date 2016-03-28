@@ -50,9 +50,14 @@ body {
       }
     }
   }
-
 }
 
 .game-disabled {
   pointer-events: none;
+}
+
+.status {
+  background-color: lightblue;
+  width: 50%;
+  margin: 0 auto;
 }
