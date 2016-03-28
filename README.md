@@ -9,7 +9,7 @@ Players communicate moves between each other through their respective socket con
 
 ## Stack
 ### Front end
-- React
+- React (ES6)
 - Socket.io
 - SASS
 - Webpack
