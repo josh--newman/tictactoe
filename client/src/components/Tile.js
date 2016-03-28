@@ -11,9 +11,9 @@ export default class Tile extends React.Component {
 
   renderTileImage() {
     if (this.props.value === 0) {
-      return <span></span>;
+      return <p></p>;
     } else {
-      return <span>{this.props.value}</span>;
+      return <p>{this.props.value}</p>;
     }
   }
 
