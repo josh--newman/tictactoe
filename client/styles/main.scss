@@ -1,5 +1,17 @@
+// VARIABLES
+$font-stack: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+// COLOURS
+$mona-lisa: #FE938C;
+$wax-flower: #E6B89C;
+$givry: #EAD2AC;
+$gull-gray: #9CAFB7;
+$wedgewood: #4281A4;
+$white-smoke: #F0F0F0;
+$dark-smoke: #F0F0F0;
+
 body {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font: 100% $font-stack;
   font-weight: 300;
   h1,h2 {
     font-weight: 300;
@@ -20,14 +32,27 @@ body {
 }
 
 .board {
-  display: flex;
-  background-color: lightgray;
   margin-left: 2em;
+
   .board-row {
+    display: flex;
     .tile {
-      flex: 1;
-      padding: 5em;
+      background-color: $white-smoke;
+      width: 5em;
+      height: 5em;
+      border: 1px solid $dark-smoke;
+      padding: 10px;
+      margin: 10px;
+      font-size: 1.2em;
+
+      &:hover {
+        box-shadow: 0px 5px 22px -4px rgba(71,71,71,1);
+      }
     }
   }
 
+}
+
+.game-disabled {
+  pointer-events: none;
 }

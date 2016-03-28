@@ -93,7 +93,7 @@ export default class App extends Component {
     // then reconnect again to play another game
     socket.disconnect();
     socket.connect();
-    this.setState({ currentlyPlaying: false });
+    this.setState(defaultState);
   }
 
   playerDisconnect() {
@@ -112,8 +112,7 @@ export default class App extends Component {
           <Status winner={this.state.winner.name} />
           <Board key={this.state.gameId}
                  makeMove={this.makeMove.bind(this)}
-                 whoseTurn={this.state.whoseTurn}
-                 layout={this.state.boardLayout} />
+                 {...this.state} />
         </div>
       </div>
     );
