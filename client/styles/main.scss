@@ -31,9 +31,49 @@ body {
   margin: 0 auto;
 }
 
+.menu {
+  flex: 1;
+  input {
+    width: 50%;
+    height: 2em;
+    font-size: 0.9em;
+  }
+  button {
+    height: 2em;
+    display: inline-block;
+    margin: 5px;
+    border: 0;
+    font-family: $font-stack;
+    color: white;
+    font-size: 1em;
+    background: $wedgewood;
+    padding: 5px 10px;
+    text-decoration: none;
+
+    &:hover {
+      background: $gull-gray;
+      text-decoration: none;
+    }
+  }
+
+  .my-turn {
+    background-color: lightblue;
+  }
+  .other-turn {
+    background-color: lightblue;
+  }
+  .player-card {
+    line-height: 3em;
+    .symbol {
+      display: inline-block;
+      float: right;
+    }
+  }
+}
+
 .board {
   margin-left: 2em;
-
+  flex: 3;
   .board-row {
     display: flex;
     .tile {

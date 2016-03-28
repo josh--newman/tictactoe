@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class Menu extends Component {
   constructor(props) {
@@ -47,19 +48,26 @@ export default class Menu extends Component {
   }
 
   render() {
+    const playerCardClass = classNames('player-card', {
+      'my-turn': this.props.me.id === this.props.whoseTurn
+    });
+    const otherPlayerClass = classNames('player-card', {
+      'other-turn': this.props.otherPlayer.id === this.props.whoseTurn
+    });
     return (
       <div className='menu'>
         {this.renderStartEnd()}
 
         <div className="player-info">
           <h2>Players</h2>
-          <div className="player-card">
-            <span>{this.props.me.name}</span>
-            <span>{this.props.me.symbol}</span>
+          <hr/>
+          <div className={playerCardClass}>
+            <span className='name'>{this.props.me.name}</span>
+            <span className='symbol'>{this.props.me.symbol}</span>
           </div>
-          <div className="player-card">
-            <span>{this.props.otherPlayer.name}</span>
-            <span>{this.props.otherPlayer.symbol}</span>
+          <div className={otherPlayerClass}>
+            <span className='name'>{this.props.otherPlayer.name}</span>
+            <span className='symbol'>{this.props.otherPlayer.symbol}</span>
           </div>
         </div>
       </div>
