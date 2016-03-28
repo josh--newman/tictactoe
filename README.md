@@ -34,7 +34,7 @@ client
 └── index.js
 ```
 
-Socket listeners are set up in the `App.js` component.
+The front end is composed of React components. App state and socket listeners are handled in the `App.js` component.
 
 ### Backend
 - Node
@@ -57,6 +57,12 @@ server
 ├── index.js
 └── main.js
 ```
+
+The core logic of the game is in `board.js` and `game.js`. The game supports an NxN board, though a 3x3 board is hardcoded at present.
+
+All logic for the game lives on the server. This prevents a player from maliciously manipulating the game to their advantage.
+
+The game assumes 2 human players (no AI).
 
 ### Setup
 ```
