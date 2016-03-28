@@ -60,7 +60,6 @@ export default class App extends Component {
       boardLayout: data.boardLayout,
       gameId:      data.gameId
     });
-    console.log(this.state);
   }
 
   makeMove(move) {
@@ -71,7 +70,6 @@ export default class App extends Component {
       coords: move,
       player: this.state.me
     };
-    console.log(moveData);
     socket.emit('make move', moveData);
   }
 
