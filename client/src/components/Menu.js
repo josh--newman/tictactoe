@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import Status from './Status';
 
 export default class Menu extends Component {
   constructor(props) {
@@ -70,6 +71,8 @@ export default class Menu extends Component {
             <span className='symbol'>{this.props.otherPlayer.symbol}</span>
           </div>
         </div>
+
+        <Status message={this.props.message} />
       </div>
     );
   }

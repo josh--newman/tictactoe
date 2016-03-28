@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 export default class Tile extends React.Component {
   constructor(props) {
@@ -18,8 +19,11 @@ export default class Tile extends React.Component {
   }
 
   render() {
+    const tileClass = classNames('tile', {
+      'game-disabled': this.props.value !== 0
+    });
     return (
-      <div className="tile"
+      <div className={tileClass}
            onClick={this.handleClick.bind(this)}>
         {this.renderTileImage()}
       </div>

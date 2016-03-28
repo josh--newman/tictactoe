@@ -8,7 +8,7 @@ export default class Status extends React.Component {
   render() {
     return (
       <div className="status">
-        <p>Status: {this.props.winner}</p>
+        <p>{this.props.message}</p>
       </div>
     );
   }

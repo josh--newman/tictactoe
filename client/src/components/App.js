@@ -5,7 +5,6 @@ const socket = io(serverURL);
 
 import Menu from './Menu';
 import Board from './Board';
-import Status from './Status';
 
 const defaultState = {
   waiting: false,
@@ -15,7 +14,8 @@ const defaultState = {
   whoseTurn:   null,
   boardLayout: [[0,0,0],[0,0,0],[0,0,0]],
   gameId:      null,
-  winner:      ''
+  winner:      '',
+  message:     ''
 };
 
 export default class App extends Component {
@@ -45,7 +45,8 @@ export default class App extends Component {
   }
 
   gameCreated(data) {
-    console.log(data);
+    this.setState(defaultState);
+
     const myId = `/#${socket.io.engine.id}`;
     const me = data.player1.id === myId ? data.player1 : data.player2;
     const other = myId === data.player1.id ? data.player2 : data.player1;
@@ -82,10 +83,11 @@ export default class App extends Component {
   }
 
   gameOver(winner) {
-    this.setState({ winner: winner });
-    setTimeout(() => {
-      this.setState(defaultState);
-    }, 3000);
+    this.setState({
+      winner: winner,
+      message: `${winner.name} wins!`,
+      currentlyPlaying: false
+    });
   }
 
   onEndGame() {
@@ -97,8 +99,8 @@ export default class App extends Component {
   }
 
   playerDisconnect() {
-    console.log('Other player disconnected');
     this.setState(defaultState);
+    this.setState({ message: 'Other player disconnected' });
   }
 
   render() {
@@ -113,7 +115,6 @@ export default class App extends Component {
                  makeMove={this.makeMove.bind(this)}
                  {...this.state} />
         </div>
-        <Status winner={this.state.winner.name} />
       </div>
     );
   }
