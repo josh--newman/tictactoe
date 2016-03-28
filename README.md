@@ -59,10 +59,16 @@ server
 ```
 
 ### Setup
-```bash
+```
 $ npm install
 $ npm run dev
 ```
+
+### Test
+```
+$ npm run test
+```
+
 
 ### What to do better
 - Write thorough front end tests
